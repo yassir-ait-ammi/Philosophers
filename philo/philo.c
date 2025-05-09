@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:04:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/09 19:24:41 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/09 19:27:05 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int ac, char **av)
 	}
 	philo = parsing_the_arg(av, ac);
 	if (!philo)
-		return (ft_malloc(0, FT_CLEAR), 1);
+		return (ft_malloc(0, FT_CLEAR), 1);	
 	ft_malloc(0, FT_CLEAR);
 	return (0);
 }

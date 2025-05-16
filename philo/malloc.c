@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:33:12 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/09 15:21:27 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/16 10:46:13 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ void	*ft_malloc(size_t size, short option)
 	{
 		new = mem_alloc(size);
 		if (!new)
-			return (NULL);
+		{
+			ft_lstclear(&head, free);
+			printf("Memory allocation failed\n");
+			exit(EXIT_FAILURE);
+		}
 		ft_lstadd_back(&head, new);
 		return (new->content);
 	}

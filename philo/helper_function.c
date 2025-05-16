@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:44:26 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/09 15:53:06 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/16 10:31:38 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ int	is_number(char c)
 	return ('0' <= c && c <= '9');
 }
 
-int	is_nemuric(char *s)
+int	is_numeric(char *s)
 {
 	int	i;
 
 	i = 0;
-	if (s[i] == '-' || s[i] == '+')
+	if (!s || !s[0])
+		return (0);
+	if (s[i] == '+' || s[i] == '-')
 		i++;
 	while (s[i])
 	{

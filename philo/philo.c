@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:04:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/09 19:27:05 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:38:09 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,27 @@
 
 int	is_valid_number(char *s)
 {
-	if (!is_nemuric(s))
+	long num;
+
+	if (!is_numeric(s))
 		return (printf("%s should be just number !!\n", s), 0);
-	if (ft_atoi(s) <= 0)
+	num = atol(s);
+	if (num < 0)
 		return (printf("%s should be positive\n", s), 0);
-	if (ft_atoi(s) > 2147483647)
+	if (num > 2147483647)
 		return (printf("%s shouldn't be more than int max\n", s), 0);
 	return (1);
 }
 
-t_philo	*parsing_the_arg(char **arg, int ac)
-{
-	int		i;
-	t_philo	*philo;
 
-	philo = ft_malloc(sizeof(t_philo), FT_ALLOC);
+t_data	*parsing_the_arg(char **arg, int ac)
+{
+	t_data	*data;
+	int		i;
+
+	data = ft_malloc(sizeof(t_data), FT_ALLOC);
+	if (!data)
+		return (NULL);
 	i = 1;
 	while (i < ac)
 	{
@@ -36,29 +42,39 @@ t_philo	*parsing_the_arg(char **arg, int ac)
 			return (NULL);
 		i++;
 	}
-	philo->nb_philo = ft_atoi(arg[1]);
-	philo->tm_to_die = ft_atoi(arg[2]);
-	philo->tm_to_eat = ft_atoi(arg[3]);
-	philo->tm_to_sleep = ft_atoi(arg[4]);
-	if (arg[5])
-		philo->nb_of_meals = ft_atoi(arg[5]);
-	return (philo);
+	data->nb_philo = ft_atoi(arg[1]);
+	data->time_to_die = ft_atoi(arg[2]);
+	data->time_to_eat = ft_atoi(arg[3]);
+	data->time_to_sleep = ft_atoi(arg[4]);
+	data->nb_of_meals = (ac == 6) ? ft_atoi(arg[5]) : -1;
+	data->someone_died = 0;
+	if (data->nb_philo == 1)
+	{
+		printf("Philosophrt 1 died\n");
+		exit(1);
+	}
+	return (data);
 }
+
 
 int	main(int ac, char **av)
 {
-	t_philo	*philo;
+	t_data	*data;
 
 	if (ac != 5 && ac != 6)
 	{
 		printf("./philo <number_of_philosophers> ");
-		printf("<time_to_die> <time_to_eat> <time_to_sleep>\n");
+		printf("<time_to_die> <time_to_eat> <time_to_sleep> [number_of_meals]\n");
 		ft_malloc(0, FT_CLEAR);
 		return (1);
 	}
-	philo = parsing_the_arg(av, ac);
-	if (!philo)
-		return (ft_malloc(0, FT_CLEAR), 1);	
+	data = parsing_the_arg(av, ac);
+	if (!data)
+		return (ft_malloc(0, FT_CLEAR), 1);
+	if (init_simulation(data) != 0)
+		return (ft_malloc(0, FT_CLEAR), 1);
+	all_philo_are_alive(data);
 	ft_malloc(0, FT_CLEAR);
 	return (0);
 }
+

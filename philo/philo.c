@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:04:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/16 14:38:09 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/17 10:11:52 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 
 int	is_valid_number(char *s)
 {
-	long num;
+	long	num;
 
 	if (!is_numeric(s))
 		return (printf("%s should be just number !!\n", s), 0);
-	num = atol(s);
+	num = ft_atoi(s);
 	if (num < 0)
 		return (printf("%s should be positive\n", s), 0);
 	if (num > 2147483647)
 		return (printf("%s shouldn't be more than int max\n", s), 0);
 	return (1);
 }
-
 
 t_data	*parsing_the_arg(char **arg, int ac)
 {
@@ -56,7 +55,6 @@ t_data	*parsing_the_arg(char **arg, int ac)
 	return (data);
 }
 
-
 int	main(int ac, char **av)
 {
 	t_data	*data;
@@ -64,17 +62,19 @@ int	main(int ac, char **av)
 	if (ac != 5 && ac != 6)
 	{
 		printf("./philo <number_of_philosophers> ");
-		printf("<time_to_die> <time_to_eat> <time_to_sleep> [number_of_meals]\n");
+		printf("<time_to_die> <time_to_eat> ");
+		printf("<time_to_sleep> [number_of_meals]\n");
 		ft_malloc(0, FT_CLEAR);
 		return (1);
 	}
 	data = parsing_the_arg(av, ac);
 	if (!data)
 		return (ft_malloc(0, FT_CLEAR), 1);
+	if (!data->nb_of_meals)
+		return (ft_malloc(0, FT_CLEAR), 0);
 	if (init_simulation(data) != 0)
 		return (ft_malloc(0, FT_CLEAR), 1);
 	all_philo_are_alive(data);
 	ft_malloc(0, FT_CLEAR);
 	return (0);
 }
-

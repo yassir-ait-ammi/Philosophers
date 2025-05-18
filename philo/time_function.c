@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 10:35:30 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/17 09:58:37 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/18 15:10:54 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	ft_usleep(int ms)
 
 	start = get_time_ms();
 	while (get_time_ms() - start < ms)
-		usleep(100);
+		usleep(1);
 }

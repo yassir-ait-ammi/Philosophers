@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/17 11:09:40 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/18 17:44:55 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ typedef struct s_data
 	int				nb_philo;
 	int				time_to_die;
 	int				time_to_eat;
+	int				exit;
 	int				time_to_sleep;
 	int				nb_of_meals;
-
 	int				someone_died;
 	int				all_ate_enough;
 	long long		start_time;

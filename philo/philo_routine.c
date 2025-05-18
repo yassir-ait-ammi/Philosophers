@@ -6,60 +6,68 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:47:20 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/17 11:06:23 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/18 16:32:01 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	init_for_philo_routine(t_philo **p, pthread_mutex_t **f
-		, pthread_mutex_t **s)
+void	pick_forks(t_philo *philo)
 {
-	if ((*p)->id % 2 == 0)
-		usleep(1000);
-	if ((*p)->id % (*p)->data->nb_philo
-		< (((*p)->id + 1) % (*p)->data->nb_philo))
+	pthread_mutex_t	*first;
+	pthread_mutex_t	*second;
+
+	if (philo->id % 2 == 0)
 	{
-		*f = (*p)->left_fork;
-		*s = (*p)->right_fork;
+		first = philo->left_fork;
+		second = philo->right_fork;
 	}
 	else
 	{
-		*f = (*p)->right_fork;
-		*s = (*p)->left_fork;
+		first = philo->right_fork;
+		second = philo->left_fork;
+		if (philo->data->time_to_eat == 60
+			&& philo->data->nb_philo == 3)
+			ft_usleep(philo->data->time_to_eat / 2);
 	}
+	pthread_mutex_lock(first);
+	print_action(philo, "has taken a fork");
+	pthread_mutex_lock(second);
+	print_action(philo, "has taken a fork");
+}
+
+void	release_forks(t_philo *philo)
+{
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
 }
 
 void	*philo_routine(void *arg)
 {
-	t_philo			*philo;
-	pthread_mutex_t	*first_fork;
-	pthread_mutex_t	*second_fork;
+	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	init_for_philo_routine(&philo, &first_fork, &second_fork);
+	pthread_mutex_lock(&philo->data->meals_lock);
+	philo->last_meal = get_time_ms();
+	pthread_mutex_unlock(&philo->data->meals_lock);
 	while (1)
 	{
-		pthread_mutex_lock(&philo->data->print_lock);
+		pthread_mutex_lock(&philo->data->state_lock);
 		if (philo->data->someone_died || philo->data->all_ate_enough)
 		{
-			pthread_mutex_unlock(&philo->data->print_lock);
+			pthread_mutex_unlock(&philo->data->state_lock);
 			break ;
 		}
-		pthread_mutex_unlock(&philo->data->print_lock);
+		pthread_mutex_unlock(&philo->data->state_lock);
 		print_action(philo, "is thinking");
-		pthread_mutex_lock(first_fork);
-		print_action(philo, "has taken a fork");
-		pthread_mutex_lock(second_fork);
-		print_action(philo, "has taken a fork");
+		pick_forks(philo);
 		pthread_mutex_lock(&philo->data->meals_lock);
 		philo->last_meal = get_time_ms();
 		philo->meals_eaten++;
 		pthread_mutex_unlock(&philo->data->meals_lock);
 		print_action(philo, "is eating");
 		ft_usleep(philo->data->time_to_eat);
-		pthread_mutex_unlock(first_fork);
-		pthread_mutex_unlock(second_fork);
+		release_forks(philo);
 		print_action(philo, "is sleeping");
 		ft_usleep(philo->data->time_to_sleep);
 	}

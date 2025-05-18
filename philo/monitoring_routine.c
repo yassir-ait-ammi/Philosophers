@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:48:09 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/17 11:09:36 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:59:47 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 void	*monitor_routine(void *arg)
 {
-	t_data			*data;
-	int				i;
-	int				full;
-	int				should_stop;
-	long long		current_time;
-
-	data = (t_data *)arg;
+	t_data	*data = (t_data *)arg;
+	int		i;
+	int		full;
+	int		should_stop;
+	long long	current_time;
+	full = 0;
+	should_stop = 0;
 	while (1)
 	{
 		i = 0;
-		full = 0;
-		should_stop = 0;
 		while (i < data->nb_philo && !should_stop)
 		{
 			current_time = get_time_ms();
@@ -40,11 +38,12 @@ void	*monitor_routine(void *arg)
 				printf("%lld Philo %d died\n",
 					current_time - data->start_time,
 					data->philos[i].id);
+				data->exit = 1;
 				pthread_mutex_unlock(&data->print_lock);
 				return (NULL);
 			}
-			if (data->nb_of_meals > 0
-				&& data->philos[i].meals_eaten >= data->nb_of_meals)
+			if (data->nb_of_meals > 0 &&
+				data->philos[i].meals_eaten >= data->nb_of_meals)
 				full++;
 			pthread_mutex_unlock(&data->meals_lock);
 			i++;
@@ -53,6 +52,8 @@ void	*monitor_routine(void *arg)
 		{
 			pthread_mutex_lock(&data->state_lock);
 			data->all_ate_enough = 1;
+			printf("all philo are eating there meals\n");
+			data->exit = 0;
 			pthread_mutex_unlock(&data->state_lock);
 			return (NULL);
 		}
@@ -61,10 +62,11 @@ void	*monitor_routine(void *arg)
 		pthread_mutex_unlock(&data->state_lock);
 		if (should_stop)
 			break ;
-		usleep(1000);
+		usleep(200);
 	}
 	return (NULL);
 }
+
 
 void	print_action(t_philo *philo, const char *msg)
 {

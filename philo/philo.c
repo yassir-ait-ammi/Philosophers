@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:04:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/18 17:45:54 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:57:41 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int	is_valid_number(char *s)
 	long	num;
 
 	if (!is_numeric(s))
-		return (printf("%s should be just number !!\n", s), 0);
+		return (printf("%s : should be just number !!\n", s), 0);
 	num = ft_atoi(s);
 	if (num < 0)
-		return (printf("%s should be positive\n", s), 0);
+		return (printf("%s : should be positive\n", s), 0);
 	if (num > 2147483647)
-		return (printf("%s shouldn't be more than int max\n", s), 0);
+		return (printf("%s : shouldn't be more than int max\n", s), 0);
 	return (1);
 }
 
@@ -65,7 +65,7 @@ int	main(int ac, char **av)
 	{
 		printf("./philo <number_of_philosophers> ");
 		printf("<time_to_die> <time_to_eat> ");
-		printf("<time_to_sleep> [number_of_meals]\n");
+		printf("<time_to_sleep> <number_of_meals (optional argument)>\n");
 		ft_malloc(0, FT_CLEAR);
 		return (1);
 	}

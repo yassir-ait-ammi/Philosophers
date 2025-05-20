@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:48:09 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/18 14:59:47 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:04:53 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ void	*monitor_routine(void *arg)
 	int		full;
 	int		should_stop;
 	long long	current_time;
-	full = 0;
-	should_stop = 0;
+
 	while (1)
 	{
 		i = 0;
+		full = 0;
+		should_stop = 0;
 		while (i < data->nb_philo && !should_stop)
 		{
 			current_time = get_time_ms();

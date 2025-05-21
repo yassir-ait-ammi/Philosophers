@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:47:20 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/21 14:47:51 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/21 20:03:58 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,18 @@ void	release_forks(t_philo *philo)
 	pthread_mutex_unlock(philo->right_fork);
 }
 
+void	*if_eat_or_die(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->state_lock);
+	if (philo->data->someone_died || philo->data->all_ate_enough)
+	{
+		pthread_mutex_unlock(&philo->data->state_lock);
+		return (NULL);
+	}
+	pthread_mutex_unlock(&philo->data->state_lock);
+	return ((void *)1);
+}
+
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
@@ -51,13 +63,8 @@ void	*philo_routine(void *arg)
 	pthread_mutex_unlock(&philo->data->meals_lock);
 	while (1)
 	{
-		pthread_mutex_lock(&philo->data->state_lock);
-		if (philo->data->someone_died || philo->data->all_ate_enough)
-		{
-			pthread_mutex_unlock(&philo->data->state_lock);
+		if (!if_eat_or_die(philo))
 			break ;
-		}
-		pthread_mutex_unlock(&philo->data->state_lock);
 		print_action(philo, "is thinking");
 		pick_forks(philo);
 		pthread_mutex_lock(&philo->data->meals_lock);

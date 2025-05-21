@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:04:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/20 16:00:50 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/21 20:07:08 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ int	is_valid_number(char *s)
 	return (1);
 }
 
+void	init_the_args(char **arg, t_data **data, int ac)
+{
+	(*data)->exit = 0;
+	(*data)->nb_philo = ft_atoi(arg[1]);
+	(*data)->time_to_die = ft_atoi(arg[2]);
+	(*data)->time_to_eat = ft_atoi(arg[3]);
+	(*data)->time_to_sleep = ft_atoi(arg[4]);
+	if (ac == 6)
+		(*data)->nb_of_meals = ft_atoi(arg[5]);
+	else
+		(*data)->nb_of_meals = -1;
+	(*data)->someone_died = 0;
+}
+
 t_data	*parsing_the_arg(char **arg, int ac)
 {
 	t_data	*data;
@@ -41,13 +55,7 @@ t_data	*parsing_the_arg(char **arg, int ac)
 			return (NULL);
 		i++;
 	}
-	data->exit = 0;
-	data->nb_philo = ft_atoi(arg[1]);
-	data->time_to_die = ft_atoi(arg[2]);
-	data->time_to_eat = ft_atoi(arg[3]);
-	data->time_to_sleep = ft_atoi(arg[4]);
-	data->nb_of_meals = (ac == 6) ? ft_atoi(arg[5]) : -1;
-	data->someone_died = 0;
+	init_the_args(arg, &data, ac);
 	if (data->nb_philo == 1)
 	{
 		printf("0 philo is thinking\n");

@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:44:26 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/09 19:30:32 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:07:47 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,26 @@ int	is_nemuric(char *s)
 		i++;
 	}
 	return (1);
+}
+
+long long	get_time_ms(void)
+{
+		struct timeval  tv;
+
+		gettimeofday(&tv, NULL);
+		return ((tv.tv_sec * 1000LL) + (tv.tv_usec / 1000));
+}
+
+void	print_action(t_philo *philo, const char *msg)
+{
+	sem_wait(philo->data->print);
+	printf("%lld %d %s\n", get_time_ms() - philo->data->start_time, philo->id, msg);
+	sem_post(philo->data->print);
+}
+
+void	ft_usleep(long ms)
+{
+	long start = get_time_ms();
+	while ((get_time_ms() - start) < ms)
+		usleep(100);
 }

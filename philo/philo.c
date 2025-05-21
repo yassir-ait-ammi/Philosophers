@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:04:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/20 14:57:41 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:00:50 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ t_data	*parsing_the_arg(char **arg, int ac)
 	data->someone_died = 0;
 	if (data->nb_philo == 1)
 	{
-		printf("Philosopher 1 died\n");
+		printf("0 philo is thinking\n");
+		printf("0 philo is taken a fork\n");
+		printf("0 Philo 1 died\n");
 		return (NULL);
 	}
 	return (data);

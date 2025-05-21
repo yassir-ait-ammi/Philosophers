@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/16 10:21:23 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:16:39 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,48 @@
 # include <stdlib.h>
 # define FT_ALLOC 1
 # define FT_CLEAR 0
+# include <fcntl.h>
+# include <sys/stat.h>
+# include <semaphore.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <string.h>
+# include <sys/types.h>
+# include <pthread.h>
+# include <sys/wait.h>
+# include <signal.h>
+
+typedef struct s_data
+{
+	int				nb_philo;
+	int				tm_to_die;
+	int				tm_to_eat;
+	int				tm_to_sleep;
+	int				nb_of_meals;
+	int				someone_died;
+	int				all_ate_enough;
+	long			start_time;
+	struct s_philo		*philos;
+	sem_t			*forks;
+	sem_t			*print;
+	sem_t			*meals;
+	sem_t			*dead;
+	sem_t			*state_sem;
+}	t_data;
 
 typedef struct s_philo
 {
-	unsigned int		nb_philo;
-	unsigned int		tm_to_die;
-	unsigned int		tm_to_eat;
-	unsigned int		tm_to_sleep;
-	unsigned int		nb_of_meals;
-}				t_philo;
+	int				id;
+	int				meals_eaten;
+	sem_t			alive_sem;
+	long			last_meal;
+	int				is_alive;
+	pid_t			pid;
+	t_data			*data;
+}	t_philo;
+
 
 typedef struct s_list
 {
@@ -41,5 +74,11 @@ int				ft_strlen(const char *c);
 long			ft_atoi(const char *str);
 void			*ft_malloc(size_t size, short option);
 int				is_nemuric(char *s);
+int				init_simulation(t_data *data);
+void			print_action(t_philo *philo, const char *msg);
+void			ft_usleep(long ms);
+void			init_semaphore(t_data *data);
+void			start_simulation(t_data *data);
+long long		get_time_ms(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/21 19:16:39 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 15:48:00 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ typedef struct s_data
 	int				someone_died;
 	int				all_ate_enough;
 	long			start_time;
-	struct s_philo		*philos;
+	struct s_philo	*philos;
+	int				is_one_dead;
 	sem_t			*forks;
 	sem_t			*print;
 	sem_t			*meals;
 	sem_t			*dead;
 	sem_t			*state_sem;
+	sem_t			*death_sem;
 }	t_data;
 
 typedef struct s_philo
@@ -58,7 +60,6 @@ typedef struct s_philo
 	pid_t			pid;
 	t_data			*data;
 }	t_philo;
-
 
 typedef struct s_list
 {
@@ -80,5 +81,10 @@ void			ft_usleep(long ms);
 void			init_semaphore(t_data *data);
 void			start_simulation(t_data *data);
 long long		get_time_ms(void);
+void			clean_exit(t_data *data, int exit_status);
+void			*monitor_death(void *arg);
+int				if_is_dead(t_philo *philo);
+void			wait_and_print_if_all_ate(t_data *data, pid_t *pids);
+void			philo_routine(t_philo *philo);
 
 #endif

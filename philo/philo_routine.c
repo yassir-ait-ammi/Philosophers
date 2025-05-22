@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:47:20 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/21 20:03:58 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 10:03:10 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	pick_forks(t_philo *philo)
 	{
 		first = philo->right_fork;
 		second = philo->left_fork;
-		if (philo->data->nb_philo == 3)
+		if (philo->data->nb_philo % 2 != 0)
 			ft_usleep(philo->data->time_to_eat / 2);
 	}
 	pthread_mutex_lock(first);

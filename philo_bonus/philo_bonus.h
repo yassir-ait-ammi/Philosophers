@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/22 16:32:29 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:48:38 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_data
 typedef struct s_philo
 {
 	int				id;
-	int				meals_eaten;
+	long			meals_eaten;
 	sem_t			alive_sem;
 	long			last_meal;
 	int				is_alive;

@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:47:20 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/22 16:36:10 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:48:54 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ void	*philo_routine(void *arg)
 		pthread_mutex_lock(&philo->data->meals_lock);
 		philo->last_meal = get_time_ms();
 		philo->meals_eaten++;
+		if (philo->meals_eaten > 2147483647)
+			break ;
 		pthread_mutex_unlock(&philo->data->meals_lock);
 		print_action(philo, "is eating");
 		ft_usleep(philo->data->time_to_eat, philo);

@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 10:35:30 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/18 15:10:54 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:30:50 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,15 @@ long long	get_time_ms(void)
 	return ((tv.tv_sec * 1000LL) + (tv.tv_usec / 1000));
 }
 
-void	ft_usleep(int ms)
+void	ft_usleep(int ms, t_philo *philo)
 {
 	long long	start;
 
 	start = get_time_ms();
 	while (get_time_ms() - start < ms)
+	{
+		if (!if_eat_or_die(philo))
+			break ;
 		usleep(1);
+	}
 }

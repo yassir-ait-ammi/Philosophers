@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/21 20:00:56 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:31:37 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,13 @@ int				all_philo_are_alive(t_data *data);
 int				is_numeric(char *s);
 int				init_simulation(t_data *data);
 long long		get_time_ms(void);
-void			ft_usleep(int ms);
+void			ft_usleep(int ms, t_philo *philo);
 void			*philo_routine(void *arg);
 void			*monitor_routine(void *arg);
 void			print_action(t_philo *philo, const char *msg);
 int				init_simulation(t_data *data);
 int				should_continue(t_data *data);
 int				all_philo_are_alive(t_data *data);
+void			*if_eat_or_die(t_philo *philo);
 
 #endif

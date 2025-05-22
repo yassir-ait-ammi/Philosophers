@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:47:20 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/22 10:03:10 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:36:10 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ void	pick_forks(t_philo *philo)
 		first = philo->right_fork;
 		second = philo->left_fork;
 		if (philo->data->nb_philo % 2 != 0)
-			ft_usleep(philo->data->time_to_eat / 2);
+			ft_usleep(philo->data->time_to_eat / 2, philo);
 	}
 	pthread_mutex_lock(first);
 	print_action(philo, "has taken a fork");
 	pthread_mutex_lock(second);
-	print_action(philo, "has taken a fork");
 }
 
 void	release_forks(t_philo *philo)
@@ -72,10 +71,10 @@ void	*philo_routine(void *arg)
 		philo->meals_eaten++;
 		pthread_mutex_unlock(&philo->data->meals_lock);
 		print_action(philo, "is eating");
-		ft_usleep(philo->data->time_to_eat);
+		ft_usleep(philo->data->time_to_eat, philo);
 		release_forks(philo);
 		print_action(philo, "is sleeping");
-		ft_usleep(philo->data->time_to_sleep);
+		ft_usleep(philo->data->time_to_sleep, philo);
 	}
 	return (NULL);
 }

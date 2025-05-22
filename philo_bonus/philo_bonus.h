@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/22 16:04:28 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:32:29 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void			*ft_malloc(size_t size, short option);
 int				is_nemuric(char *s);
 int				init_simulation(t_data *data);
 void			print_action(t_philo *philo, const char *msg);
-void			ft_usleep(long ms);
+void			ft_usleep(long ms, t_philo *philo);
 void			init_semaphore(t_data *data);
 void			start_simulation(t_data *data);
 long long		get_time_ms(void);

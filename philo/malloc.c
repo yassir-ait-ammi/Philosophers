@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:33:12 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/21 20:04:49 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:02:41 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ t_list	*mem_alloc(size_t size)
 	{
 		ft_malloc(0, FT_CLEAR);
 		free(ptr);
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
 	new = ft_lstnew(ptr);
 	if (!new)
 	{
 		ft_malloc(0, FT_CLEAR);
 		free(ptr);
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:02:45 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/21 15:20:07 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:03:58 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ int	all_philo_are_alive(t_data *data)
 		data->philos[i].last_meal = data->start_time;
 		if (pthread_create(&data->philos[i].thread, NULL,
 				philo_routine, &data->philos[i]) != 0)
-			return (perror("Failed to create thread"), 1);
+			return (printf("Failed to create thread\n"), 1);
 		i++;
 	}
 	if (pthread_create(&monitor, NULL, monitor_routine, data) != 0)
-		return (perror("Failed to create monitor"), 1);
+		return (printf("Failed to create monitor\n"), 1);
 	i = 0;
 	pthread_join(monitor, NULL);
 	while (i < data->nb_philo)

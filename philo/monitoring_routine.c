@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:48:09 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/21 20:00:14 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:10:48 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*check_if_all_eat(t_data *data, int full)
 	{
 		pthread_mutex_lock(&data->state_lock);
 		data->all_ate_enough = 1;
-		printf("all philo are eating there meals\n");
+		printf("All philo are eating there meals\n");
 		data->exit = 0;
 		pthread_mutex_unlock(&data->state_lock);
 		return (NULL);

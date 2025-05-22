@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:04:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/21 20:07:08 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:14:38 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,9 @@ int	main(int ac, char **av)
 	data = parsing_the_arg(av, ac);
 	if (!data)
 		return (ft_malloc(0, FT_CLEAR), 1);
-	if (!data->nb_of_meals)
-		return (ft_malloc(0, FT_CLEAR), 0);
+	if (data->nb_of_meals == 0)
+		return (printf("All philo are eating there meals\n"),
+			ft_malloc(0, FT_CLEAR), 0);
 	if (init_simulation(data) != 0)
 		return (ft_malloc(0, FT_CLEAR), 1);
 	all_philo_are_alive(data);

@@ -6,12 +6,12 @@
 #    By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 15:05:44 by yaait-am          #+#    #+#              #
-#    Updated: 2025/05/22 16:07:23 by yaait-am         ###   ########.fr        #
+#    Updated: 2025/05/23 18:15:46 by yaait-am         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror # -g3 -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=thread
 NAME = philo_bonus
 SRC = philo_bonus.c init_data_bonus.c malloc_bonus.c helper_function_bonus.c Libft_used/ft_lstadd_back_bonus.c Libft_used/ft_lstclear_bonus.c \
 		Libft_used/ft_lstnew_bonus.c Libft_used/ft_split_bonus.c Libft_used/ft_strlen_bonus.c inti_start_simulation_bonus.c \

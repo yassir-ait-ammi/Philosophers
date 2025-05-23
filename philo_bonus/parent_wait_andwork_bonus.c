@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 15:30:37 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/22 15:42:05 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/23 18:59:56 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,15 @@ void	exit_for_parent(int exit_count, t_data *data)
 
 void	wait_and_print_if_all_ate(t_data *data, pid_t *pids)
 {
-	int (status), (exit_count), (i);
+	int (status), (exit_count);
+	(void)pids;
 	exit_count = 0;
 	while (exit_count < data->nb_philo)
 	{
 		if (wait(&status) == -1)
 			break ;
-		if (WIFEXITED(status))
-		{
-			if (WEXITSTATUS(status) == 1)
-			{
-				i = 0;
-				while (i < data->nb_philo)
-				{
-					kill(pids[i], SIGKILL);
-					i++;
-				}
-				break ;
-			}
-			else if (WEXITSTATUS(status) == 0)
-				exit_count++;
-		}
+		if (WEXITSTATUS(status) == 0)
+			exit_count++;
 	}
 	exit_for_parent(exit_count, data);
 }
@@ -57,7 +45,7 @@ void	start_simulation(t_data *data)
 
 	i = 0;
 	data->start_time = get_time_ms();
-	pid = ft_malloc(sizeof(pid_t) * data->nb_philo, FT_ALLOC);
+	pid = ft_malloc(sizeof(pid_t *) * data->nb_philo, FT_ALLOC);
 	while (i < data->nb_philo)
 	{
 		pid[i] = fork();

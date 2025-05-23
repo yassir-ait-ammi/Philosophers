@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:44:26 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/22 16:33:33 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/23 18:56:19 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ long long	get_time_ms(void)
 
 void	print_action(t_philo *philo, const char *msg)
 {
+	sem_wait(&philo->alive_sem);
+	if (!if_is_dead(philo))
+	{
+		sem_post(&philo->alive_sem);
+		return ;
+	}
+	sem_post(&philo->alive_sem);
 	sem_wait(philo->data->print);
 	printf("%lld %d %s\n", get_time_ms() - philo->data->start_time,
 		philo->id, msg);
@@ -53,10 +60,12 @@ void	ft_usleep(long ms, t_philo *philo)
 {
 	long	start;
 
+	if (!if_is_dead(philo))
+		return ;
 	start = get_time_ms();
 	while ((get_time_ms() - start) < ms)
 	{
-		if (if_is_dead(philo))
+		if (!if_is_dead(philo))
 			break ;
 		usleep(100);
 	}

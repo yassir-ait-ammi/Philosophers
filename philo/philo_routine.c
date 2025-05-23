@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:47:20 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/22 16:48:54 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:23:37 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,23 @@
 
 void	pick_forks(t_philo *philo)
 {
-	pthread_mutex_t	*first;
-	pthread_mutex_t	*second;
+	int	left_fork;
+	int	right_fork;
 
+	left_fork = philo->id - 1;
+	right_fork = philo->id % philo->data->nb_philo;
+	if (philo->id % 2 != 0)
+		usleep(2000);
 	if (philo->id % 2 == 0)
 	{
-		first = philo->left_fork;
-		second = philo->right_fork;
+		pthread_mutex_lock(&philo->data->forks[right_fork]);
+		pthread_mutex_lock(&philo->data->forks[left_fork]);
 	}
 	else
 	{
-		first = philo->right_fork;
-		second = philo->left_fork;
-		if (philo->data->nb_philo % 2 != 0)
-			ft_usleep(philo->data->time_to_eat / 2, philo);
+		pthread_mutex_lock(&philo->data->forks[left_fork]);
+		pthread_mutex_lock(&philo->data->forks[right_fork]);
 	}
-	pthread_mutex_lock(first);
-	print_action(philo, "has taken a fork");
-	pthread_mutex_lock(second);
 }
 
 void	release_forks(t_philo *philo)

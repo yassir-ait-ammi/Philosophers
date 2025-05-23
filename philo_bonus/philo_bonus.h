@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/22 16:48:38 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:24:38 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_data
 	int				is_one_dead;
 	sem_t			*forks;
 	sem_t			*print;
+	sem_t			*for_dead;
 	sem_t			*meals;
 	sem_t			*dead;
 	sem_t			*state_sem;

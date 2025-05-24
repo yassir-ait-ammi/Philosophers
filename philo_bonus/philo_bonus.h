@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/23 16:24:38 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 09:53:04 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ void			*monitor_death(void *arg);
 int				if_is_dead(t_philo *philo);
 void			wait_and_print_if_all_ate(t_data *data, pid_t *pids);
 void			philo_routine(t_philo *philo);
+int				is_zero(char *s);
 
 #endif

@@ -6,17 +6,27 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:04:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/23 19:00:22 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 09:54:07 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
+int	is_zero(char *s)
+{
+	long	num;
+
+	num = ft_atoi(s);
+	if (num == 0)
+		return (printf("%s : should be more than zero\n", s), 1);
+	return (0);
+}
+
 int	is_valid_number(char *s)
 {
 	if (!is_nemuric(s))
 		return (printf("%s : should be just number !!\n", s), 0);
-	if (ft_atoi(s) <= 0)
+	if (ft_atoi(s) < 0)
 		return (printf("%s : should be positive\n", s), 0);
 	if (ft_atoi(s) > 2147483647)
 		return (printf("%s : shouldn't be more than int max\n", s), 0);
@@ -33,6 +43,8 @@ t_data	*parsing_the_arg(char **arg, int ac)
 	while (i < ac)
 	{
 		if (!is_valid_number(arg[i]))
+			return (NULL);
+		if (is_zero(arg[i]) && i < ac - 1)
 			return (NULL);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 10:35:30 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/22 16:30:50 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 10:16:44 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	ft_usleep(int ms, t_philo *philo)
 	{
 		if (!if_eat_or_die(philo))
 			break ;
-		usleep(1);
+		usleep(100);
 	}
 }

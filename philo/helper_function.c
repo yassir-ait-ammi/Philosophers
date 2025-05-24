@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:44:26 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/16 10:31:38 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 09:54:30 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,14 @@ int	is_numeric(char *s)
 		i++;
 	}
 	return (1);
+}
+
+int	is_zero(char *s)
+{
+	long	num;
+
+	num = ft_atoi(s);
+	if (num == 0)
+		return (printf("%s : should be more than zero\n", s), 1);
+	return (0);
 }

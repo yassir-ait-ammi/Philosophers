@@ -6,11 +6,11 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:21:06 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/09 15:22:46 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:29:19 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 static int	check(char h, char *charset)
 {

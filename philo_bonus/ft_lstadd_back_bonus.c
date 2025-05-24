@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 08:15:40 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/09 15:21:39 by yaait-am         ###   ########.fr       */
+/*   Created: 2024/10/28 09:57:50 by yaait-am          #+#    #+#             */
+/*   Updated: 2025/05/24 19:30:54 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo_bonus.h"
 
-int	ft_strlen(const char *c)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	size_t	i;
+	t_list	*yas;
 
-	i = 0;
-	if (!c)
-		return (0);
-	while (c[i])
-		i++;
-	return (i);
-}
-
-void	*ft_memset(void *s, int c, size_t n)
-{
-	size_t			i;
-	unsigned char	*y;
-
-	i = 0;
-	y = s;
-	while (i < n)
+	if (!lst || !new)
+		return ;
+	if (*lst == NULL)
+		*lst = new;
+	else
 	{
-		y[i] = c;
-		i++;
+		yas = *lst;
+		while (yas->next != NULL)
+			yas = yas->next;
+		yas->next = new;
 	}
-	return (y);
 }

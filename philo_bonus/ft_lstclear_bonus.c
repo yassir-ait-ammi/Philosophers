@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 09:57:50 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/09 15:20:49 by yaait-am         ###   ########.fr       */
+/*   Created: 2024/10/28 10:29:54 by yaait-am          #+#    #+#             */
+/*   Updated: 2025/05/24 19:30:54 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo_bonus.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*yas;
+	t_list	*one;
+	t_list	*two;
 
-	if (!lst || !new)
+	if (!lst || !del)
 		return ;
-	if (*lst == NULL)
-		*lst = new;
-	else
+	one = *lst;
+	while (one != NULL)
 	{
-		yas = *lst;
-		while (yas->next != NULL)
-			yas = yas->next;
-		yas->next = new;
+		two = one->next;
+		del(one->content);
+		free(one);
+		one = two;
 	}
+	*lst = NULL;
 }

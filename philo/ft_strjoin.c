@@ -6,11 +6,11 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 09:59:38 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/09 15:20:49 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:29:19 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 char	*ft_strcpy(char *dest, char const *src)
 {

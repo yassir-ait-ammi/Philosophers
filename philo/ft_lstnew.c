@@ -6,11 +6,11 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 14:56:48 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/09 16:20:56 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:29:19 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 t_list	*ft_lstnew(void *content)
 {

@@ -6,11 +6,11 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:29:33 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/09 15:20:49 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 19:29:19 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "philo.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

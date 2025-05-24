@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:02:45 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/23 18:17:16 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 16:59:34 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,14 @@
 void	pick_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
-		usleep(2000);
+		usleep(500);
+	else
+		usleep(1500);
 	sem_wait(philo->data->forks);
+	if (philo->data->nb_philo == 1)
+		return ;
 	sem_wait(philo->data->forks);
+	print_action(philo, "has taken a fork");
 }
 
 void	release_forks(t_philo *philo)
@@ -31,19 +36,21 @@ int	print_the_action(t_philo *philo, long *meals_eaten)
 	if (!if_is_dead(philo))
 		return (1);
 	print_action(philo, "is thinking");
-	sem_wait(philo->data->forks);
-	sem_wait(philo->data->forks);
-	print_action(philo, "has taken a fork");
+	usleep(100 * (philo->id % 3));
+	pick_forks(philo);
+	if (!if_is_dead(philo) || philo->data->nb_philo == 1)
+	{
+		if (!if_is_dead(philo))
+			release_forks(philo);
+		return (1);
+	}
 	sem_wait(philo->data->meals);
 	philo->last_meal = get_time_ms();
 	(*meals_eaten)++;
 	sem_post(philo->data->meals);
-	if (!if_is_dead(philo))
-		return (1);
 	print_action(philo, "is eating");
 	ft_usleep(philo->data->tm_to_eat, philo);
-	sem_post(philo->data->forks);
-	sem_post(philo->data->forks);
+	release_forks(philo);
 	if (!if_is_dead(philo))
 		return (1);
 	print_action(philo, "is sleeping");

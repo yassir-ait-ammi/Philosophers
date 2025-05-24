@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/24 09:51:55 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:23:17 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ int				init_simulation(t_data *data);
 int				should_continue(t_data *data);
 int				all_philo_are_alive(t_data *data);
 void			*if_eat_or_die(t_philo *philo);
+void			*check_if_all_eat(t_data *data, int full);
 
 #endif

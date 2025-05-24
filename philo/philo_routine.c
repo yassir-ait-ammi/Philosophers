@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:47:20 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/24 11:23:09 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:03:15 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	pick_forks(t_philo *philo)
 	{
 		usleep(1000);
 		pthread_mutex_lock(&philo->data->forks[left_fork]);
+		if (philo->data->nb_philo == 1)
+			return ;
 		pthread_mutex_lock(&philo->data->forks[right_fork]);
 		print_action(philo, "is taken a fork");
 	}
@@ -38,6 +40,8 @@ void	release_forks(t_philo *philo)
 {
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
+	print_action(philo, "is sleeping");
+	ft_usleep(philo->data->time_to_sleep, philo);
 }
 
 void	*if_eat_or_die(t_philo *philo)
@@ -66,6 +70,8 @@ void	*philo_routine(void *arg)
 			break ;
 		print_action(philo, "is thinking");
 		pick_forks(philo);
+		if (philo->data->nb_philo == 1)
+			break ;
 		pthread_mutex_lock(&philo->data->meals_lock);
 		philo->last_meal = get_time_ms();
 		philo->meals_eaten++;
@@ -75,8 +81,6 @@ void	*philo_routine(void *arg)
 		print_action(philo, "is eating");
 		ft_usleep(philo->data->time_to_eat, philo);
 		release_forks(philo);
-		print_action(philo, "is sleeping");
-		ft_usleep(philo->data->time_to_sleep, philo);
 	}
 	return (NULL);
 }

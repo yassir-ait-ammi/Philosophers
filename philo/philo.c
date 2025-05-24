@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:04:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/24 09:59:12 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 17:00:31 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,6 @@ t_data	*parsing_the_arg(char **arg, int ac)
 		i++;
 	}
 	init_the_args(arg, &data, ac);
-	if (data->nb_philo == 1)
-	{
-		printf("0 philo is thinking\n");
-		printf("0 philo is taken a fork\n");
-		printf("0 Philo 1 died\n");
-		return (NULL);
-	}
 	return (data);
 }
 

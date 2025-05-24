@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:04:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/24 09:54:07 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 11:57:59 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_data	*parsing_the_arg(char **arg, int ac)
 	{
 		if (!is_valid_number(arg[i]))
 			return (NULL);
-		if (is_zero(arg[i]) && i < ac - 1)
+		if (i < ac - 1 && is_zero(arg[i]))
 			return (NULL);
 		i++;
 	}

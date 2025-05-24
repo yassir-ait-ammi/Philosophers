@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:47:20 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/24 10:12:25 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/24 10:43:17 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	pick_forks(t_philo *philo)
 
 	left_fork = philo->id - 1;
 	right_fork = philo->id % philo->data->nb_philo;
-	if ((philo->id + 1) % 2 == 0)
+	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->data->forks[right_fork]);
 		pthread_mutex_lock(&philo->data->forks[left_fork]);

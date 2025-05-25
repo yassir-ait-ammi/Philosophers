@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:02:45 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/24 16:59:34 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/25 19:02:56 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	pick_forks(t_philo *philo)
 		usleep(1500);
 	sem_wait(philo->data->forks);
 	if (philo->data->nb_philo == 1)
+	{
+		sem_post(philo->data->forks);
 		return ;
+	}
 	sem_wait(philo->data->forks);
 	print_action(philo, "has taken a fork");
 }
@@ -67,10 +70,9 @@ int	check_if_meals(t_philo *philo, long meals_eaten)
 	{
 		if (!if_is_dead(philo))
 			return (1);
-		sem_wait(&philo->alive_sem);
+		sem_wait(philo->alive_sem);
 		philo->is_alive = 0;
-		sem_post(&philo->alive_sem);
-		sem_destroy(&philo->alive_sem);
+		sem_post(philo->alive_sem);
 		return (1);
 	}
 	return (0);
@@ -81,9 +83,9 @@ void	philo_routine(t_philo *philo)
 	pthread_t	monitor;
 	long		meals_eaten;
 
-	meals_eaten = 0;
-	philo->last_meal = get_time_ms();
-	sem_init(&philo->alive_sem, 0, 1);
+	(1) && (meals_eaten = 0), (philo->last_meal = get_time_ms());
+	sem_unlink(ft_itoa(philo->id));
+	philo->alive_sem = sem_open(ft_itoa(philo->id), O_CREAT, 0644, 1);
 	philo->is_alive = 1;
 	pthread_create(&monitor, NULL, monitor_death, philo);
 	while (1)
@@ -96,6 +98,8 @@ void	philo_routine(t_philo *philo)
 			break ;
 	}
 	pthread_join(monitor, NULL);
+	sem_unlink(ft_itoa(philo->id));
+	sem_close(philo->alive_sem);
 	if (philo->data->nb_of_meals != -1
 		&& meals_eaten >= philo->data->nb_of_meals)
 		clean_exit(philo->data, EXIT_SUCCESS);

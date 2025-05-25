@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:04:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/25 09:40:31 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/25 19:42:02 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,15 @@ t_data	*parsing_the_arg(char **arg, int ac)
 	return (data);
 }
 
+void	print_message_error(t_data *data, int *exit_status)
+{
+	if (data->error == 1337)
+	{
+		printf("error : failed to creat more threads\n");
+		*exit_status = 1;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_data	*data;
@@ -78,12 +87,13 @@ int	main(int ac, char **av)
 	if (!data)
 		return (ft_malloc(0, FT_CLEAR), 1);
 	if (data->nb_of_meals == 0)
-		return (printf("All philos has taking there meals\n"),
+		return (printf("All philoscd has taking there meals\n"),
 			ft_malloc(0, FT_CLEAR), 0);
 	if (init_simulation(data) != 0)
 		return (ft_malloc(0, FT_CLEAR), 1);
 	all_philo_are_alive(data);
 	exit_status = data->exit;
+	print_message_error(data, &exit_status);
 	ft_malloc(0, FT_CLEAR);
 	return (exit_status);
 }

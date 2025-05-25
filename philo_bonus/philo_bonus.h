@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/24 09:53:04 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/25 18:48:46 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_philo
 {
 	int				id;
 	long			meals_eaten;
-	sem_t			alive_sem;
+	sem_t			*alive_sem;
 	long			last_meal;
 	int				is_alive;
 	pid_t			pid;
@@ -88,5 +88,6 @@ int				if_is_dead(t_philo *philo);
 void			wait_and_print_if_all_ate(t_data *data, pid_t *pids);
 void			philo_routine(t_philo *philo);
 int				is_zero(char *s);
+char			*ft_itoa(int n);
 
 #endif

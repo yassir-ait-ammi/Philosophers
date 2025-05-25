@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:02:45 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/25 09:27:10 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/25 19:39:59 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	init_simulation(t_data *data)
 	pthread_mutex_init(&data->meals_lock, NULL);
 	pthread_mutex_init(&data->state_lock, NULL);
 	data->someone_died = 0;
+	data->error = 0;
 	data->all_ate_enough = 0;
 	return (0);
 }
@@ -50,11 +51,26 @@ int	should_continue(t_data *data)
 	return (result);
 }
 
+void	wait_for_threads(t_data *data, pthread_t monitor, int i)
+{
+	int	j;
+
+	j = 0;
+	if (!data->error)
+		pthread_join(monitor, NULL);
+	while (j < i)
+	{
+		pthread_join(data->philos[j].thread, NULL);
+		j++;
+	}
+}
+
 int	all_philo_are_alive(t_data *data)
 {
 	pthread_t	monitor;
 	int			i;
 
+	monitor = 0;
 	data->start_time = get_time_ms();
 	i = 0;
 	while (i < data->nb_philo)
@@ -62,17 +78,15 @@ int	all_philo_are_alive(t_data *data)
 		data->philos[i].last_meal = data->start_time;
 		if (pthread_create(&data->philos[i].thread, NULL,
 				philo_routine, &data->philos[i]) != 0)
-			return (printf("Failed to create thread\n"), 1);
+		{
+			data->error = 1337;
+			break ;
+		}
 		i++;
 	}
-	if (pthread_create(&monitor, NULL, monitor_routine, data) != 0)
-		return (printf("Failed to create monitor\n"), 1);
-	i = 0;
-	pthread_join(monitor, NULL);
-	while (i < data->nb_philo)
-	{
-		pthread_join(data->philos[i].thread, NULL);
-		i++;
-	}
-	return (0);
+	if (!data->error && pthread_create(&monitor, NULL,
+			monitor_routine, data) != 0)
+		data->error = 1337;
+	wait_for_threads(data, monitor, i);
+	return (data->error);
 }

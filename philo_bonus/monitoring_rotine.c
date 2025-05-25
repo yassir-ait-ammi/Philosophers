@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 15:36:06 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/23 18:57:18 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/25 19:00:30 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	*monitor_death(void *arg)
 	{
 		if (!if_is_dead(philo))
 			break ;
-		sem_wait(&philo->alive_sem);
+		sem_wait(philo->alive_sem);
 		alive = philo->is_alive;
-		sem_post(&philo->alive_sem);
+		sem_post(philo->alive_sem);
 		if (!alive)
 			break ;
 		if (!if_is_dead(philo))

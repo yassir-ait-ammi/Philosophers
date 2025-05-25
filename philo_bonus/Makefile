@@ -6,7 +6,7 @@
 #    By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/09 15:05:44 by yaait-am          #+#    #+#              #
-#    Updated: 2025/05/24 19:31:13 by yaait-am         ###   ########.fr        #
+#    Updated: 2025/05/25 18:49:13 by yaait-am         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=thread
 NAME = philo_bonus
 SRC = philo_bonus.c init_data_bonus.c malloc_bonus.c helper_function_bonus.c ft_lstadd_back_bonus.c ft_lstclear_bonus.c \
-		ft_lstnew_bonus.c ft_split_bonus.c ft_strlen_bonus.c inti_start_simulation_bonus.c \
-		parent_wait_andwork_bonus.c monitoring_rotine.c
+		ft_lstnew_bonus.c ft_strlen_bonus.c inti_start_simulation_bonus.c parent_wait_andwork_bonus.c monitoring_rotine.c \
+		ft_itoa_bonus.c
 
 OBJ = $(SRC:.c=.o)
 

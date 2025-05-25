@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/24 12:23:17 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/25 19:09:13 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				nb_of_meals;
 	int				someone_died;
+	int				error;
 	int				all_ate_enough;
 	long long		start_time;
 	pthread_mutex_t	print_lock;
 	pthread_mutex_t	meals_lock;
+	pthread_mutex_t	handle;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	state_lock;
 	struct s_philo	*philos;

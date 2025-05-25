@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:47:20 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/24 17:47:32 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/25 19:31:15 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	pick_forks(t_philo *philo)
 		usleep(1000);
 		pthread_mutex_lock(&philo->data->forks[left_fork]);
 		if (philo->data->nb_philo == 1)
+		{
+			pthread_mutex_unlock(&philo->data->forks[left_fork]);
 			return ;
+		}
 		pthread_mutex_lock(&philo->data->forks[right_fork]);
 		print_action(philo, "is taken a fork");
 	}
@@ -47,6 +50,11 @@ void	release_forks(t_philo *philo)
 void	*if_eat_or_die(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->state_lock);
+	if (philo->data->error)
+	{
+		pthread_mutex_unlock(&philo->data->state_lock);
+		return (NULL);
+	}
 	if (philo->data->someone_died || philo->data->all_ate_enough)
 	{
 		pthread_mutex_unlock(&philo->data->state_lock);

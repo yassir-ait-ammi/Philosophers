@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 09:48:09 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/24 17:46:51 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/25 09:40:27 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*check_if_all_eat(t_data *data, int full)
 	{
 		pthread_mutex_lock(&data->state_lock);
 		data->all_ate_enough = 1;
-		printf("All philo are eating there meals.\n");
+		printf("All philos has taking there meals.\n");
 		data->exit = 0;
 		pthread_mutex_unlock(&data->state_lock);
 		return (NULL);
@@ -35,7 +35,7 @@ void	*print_the_die_message(long long current_time, t_data *data, int i)
 		data->someone_died = 1;
 		pthread_mutex_unlock(&data->state_lock);
 		pthread_mutex_lock(&data->print_lock);
-		printf("%lld Philo %d died\n",
+		printf("%lld %d died\n",
 			current_time - data->start_time,
 			data->philos[i].id);
 		data->exit = 1;
@@ -101,7 +101,7 @@ void	print_action(t_philo *philo, const char *msg)
 	if (should_continue(philo->data))
 	{
 		now = get_time_ms() - philo->data->start_time;
-		printf("%lld Philo %d %s\n", now, philo->id, msg);
+		printf("%lld %d %s\n", now, philo->id, msg);
 	}
 	pthread_mutex_unlock(&philo->data->print_lock);
 }

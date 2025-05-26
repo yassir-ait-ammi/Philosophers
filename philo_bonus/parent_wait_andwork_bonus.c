@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 15:30:37 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/23 18:59:56 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/26 13:40:51 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ void	start_simulation(t_data *data)
 	while (i < data->nb_philo)
 	{
 		pid[i] = fork();
+		if (pid[i] < 0)
+		{
+			printf("failed to creat more proccesse\n");
+			break ;
+		}
 		if (pid[i] == 0)
 		{
 			philo_routine(&data->philos[i]);

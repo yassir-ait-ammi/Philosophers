@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:02:45 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/25 18:58:08 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/26 09:33:06 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	init_simulation(t_data *data)
 
 	data->philos = ft_malloc(sizeof(t_philo) * data->nb_philo, FT_ALLOC);
 	i = 0;
-	data->is_one_dead = 0;
 	while (i < data->nb_philo)
 	{
 		data->philos[i].id = i + 1;

@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:03:13 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/25 19:09:13 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/26 09:41:18 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ int				is_zero(char *s);
 void			ft_lstadd_back(t_list **lst, t_list *new);
 void			ft_lstclear(t_list **lst, void (*del)(void *));
 t_list			*ft_lstnew(void *content);
-char			**ft_split(char *str, char *charset);
-int				ft_strlen(const char *c);
 long			ft_atoi(const char *str);
 void			*ft_malloc(size_t size, short option);
 int				is_nemuric(char *s);

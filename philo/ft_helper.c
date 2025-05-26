@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_helper.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 14:56:48 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/24 19:29:19 by yaait-am         ###   ########.fr       */
+/*   Created: 2024/10/28 10:29:54 by yaait-am          #+#    #+#             */
+/*   Updated: 2025/05/26 09:40:27 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ft_lstclear(t_list **lst, void (*del)(void *))
+{
+	t_list	*one;
+	t_list	*two;
+
+	if (!lst || !del)
+		return ;
+	one = *lst;
+	while (one != NULL)
+	{
+		two = one->next;
+		del(one->content);
+		free(one);
+		one = two;
+	}
+	*lst = NULL;
+}
 
 t_list	*ft_lstnew(void *content)
 {
@@ -51,4 +69,21 @@ long	ft_atoi(const char *str)
 	if (str[i])
 		return (-1337);
 	return ((int)yas * sir);
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*yas;
+
+	if (!lst || !new)
+		return ;
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		yas = *lst;
+		while (yas->next != NULL)
+			yas = yas->next;
+		yas->next = new;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:04:36 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/25 19:49:51 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/26 09:01:42 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int ac, char **av)
 	if (ac != 5 && ac != 6)
 	{
 		printf("./philo <number_of_philosophers> ");
-		printf("<time_to_die> <time_to_eat> <time_to_sleep>");
+		printf("<time_to_die> <time_to_eat> <time_to_sleep>	");
 		printf("<time_to_sleep> <number_of_meals (optional argument)>\n");
 		ft_malloc(0, FT_CLEAR);
 		return (1);

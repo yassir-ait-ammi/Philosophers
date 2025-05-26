@@ -6,7 +6,7 @@
 /*   By: yaait-am <yaait-am@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:33:12 by yaait-am          #+#    #+#             */
-/*   Updated: 2025/05/22 16:02:41 by yaait-am         ###   ########.fr       */
+/*   Updated: 2025/05/26 09:39:28 by yaait-am         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,25 @@ void	*ft_malloc(size_t size, short option)
 	if (option == FT_CLEAR)
 		ft_lstclear(&head, free);
 	return (NULL);
+}
+
+long long	get_time_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000LL) + (tv.tv_usec / 1000));
+}
+
+void	ft_usleep(int ms, t_philo *philo)
+{
+	long long	start;
+
+	start = get_time_ms();
+	while (get_time_ms() - start < ms)
+	{
+		if (!if_eat_or_die(philo))
+			break ;
+		usleep(100);
+	}
 }
